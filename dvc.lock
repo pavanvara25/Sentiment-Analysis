@@ -1,0 +1,39 @@
+schema: '2.0'
+stages:
+  ingest:
+    cmd: python src/data/ingest.py
+    deps:
+    - path: src/data/ingest.py
+      hash: md5
+      md5: 591f83fb1942ea12cbce56f312b65261
+      size: 3160
+    params:
+      params.yaml:
+        ingest.test_size: 0.2
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: b855e2bab4e21078d44844fee5be9da3.dir
+      size: 6882906
+      nfiles: 2
+  preprocess:
+    cmd: python src/data/preprocess.py
+    deps:
+    - path: data/raw/test.csv
+      hash: md5
+      md5: 295b88d81555e67a857db0337244e118
+      size: 1341252
+    - path: data/raw/train.csv
+      hash: md5
+      md5: 70faef66e6135c49f7f02db4a55e9fdd
+      size: 5541654
+    - path: src/data/preprocess.py
+      hash: md5
+      md5: 659f2e12915a942edbf2d4fe898a4710
+      size: 3480
+    outs:
+    - path: data/interim
+      hash: md5
+      md5: a2bbccdc23dd271231099f8d5c99ff87.dir
+      size: 5098055
+      nfiles: 2

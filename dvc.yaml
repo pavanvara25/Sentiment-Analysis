@@ -1,0 +1,19 @@
+stages:
+  ingest:
+    cmd: python src/data/ingest.py
+    deps:
+    - src/data/ingest.py
+    params:
+    - ingest.test_size
+    outs:
+    - data/raw
+
+  
+  preprocess:
+    cmd: python src/data/preprocess.py
+    deps:
+    - data/raw/train.csv
+    - data/raw/test.csv
+    - src/data/preprocess.py
+    outs:
+    - data/interim
